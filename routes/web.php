@@ -25,6 +25,14 @@ use App\Http\controllers\Schools\SchoolBlogController;
 use App\Http\controllers\Auth\AccountsController;
 use App\Http\controllers\Website\HomeController;
 
+
+// ---- === Admin Controller === ---\\
+use App\Http\controllers\Admin\Auth\AdminAuthController;
+use App\Http\controllers\Admin\Dashboard\DashboardController;
+use App\Http\controllers\Admin\SchoolsApprovals\SchoolApprovalController;
+use App\Http\controllers\Admin\BlogsApprovals\BlogApprovalController;
+// ---- === Admin Controller === ---\\
+
 // --- === All Controller === --- \\
 
 // --- === Globale Function For All Routes === --- \\
@@ -40,9 +48,7 @@ View::composer(['*'], function ($view) {
             $row->eligibility = DB::table('p_schools__eligibilities')->where('school_id', $row->school_id)->get();
         }
 
-    $view->with([
-        'count_data' => $row,
-    ]);
+    $view->with(['count_data' => $row]);
 });
 // --- === Globale Function For All Routes === --- \\
 
@@ -53,6 +59,7 @@ Route::get('SchoolSearch', [HomeController::class, 'SchoolSearch']);
 Route::get('AllSchoolList', [HomeController::class, 'AllSchoolList']);
 Route::get('AllBlogs', [HomeController::class, 'AllBlogs']);
 Route::get('BlogDetail/{blog_id}', [HomeController::class, 'BlogDetail']);
+Route::get('ProfileProgress', [HomeController::class, 'ProfileProgress']);
 // --- === Website Routes === --- \\
 
 Route::post('UserLogin', [AccountsController::class, 'UserLogin']);
@@ -122,3 +129,21 @@ Route::group(['prefix' => 'Schools', 'middleware' => 'UserMiddleware'], function
     // --- === School Blog === --- \\
 });
 // --- === School Profiles Routes Start === --- \\
+
+// --- === Campus Connect Portal Start === --- \\
+Route::get('AdminLogin', [AdminAuthController::class, 'AdminLogin']);
+Route::post('AdminSignIn', [AdminAuthController::class, 'AdminSignIn']);
+Route::get('AdminLogout', [AdminAuthController::class, 'AdminLogout']);
+
+Route::group(['prefix' => 'Admin', 'middleware' => 'AdminMiddleware'], function () {
+    // --- === Admin Dashboard === --- \\
+    Route::get('Dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
+    // --- === Admin Dashboard === --- \\
+    
+    // --- === School Approval Route === --- \\
+    Route::get('SchoolsApprovals', [SchoolApprovalController::class, 'SchoolsApprovals'])->name('SchoolsApprovals');
+    Route::get('GetSchoolList', [SchoolApprovalController::class, 'GetSchoolList'])->name('GetSchoolList');
+    // --- === School Approval Route === --- \\
+});
+
+// --- === Campus Connect Portal End === --- \\

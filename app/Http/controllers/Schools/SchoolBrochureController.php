@@ -29,15 +29,17 @@ class SchoolBrochureController extends Controller
             ->where('school_id', $req->session()->get('school_id'))
             ->get();
 
-            $data = json_encode($brochure);
-            return $data;
+        $data = json_encode($brochure);
+        return $data;
     }
     // --- === School Brochure List Function === --- \\
 
     // --- === Brochure Store Function === --- \\
     public function BrochureStore(Request $req)
     {
-        $data = DB::table('p_schools__brochures')->get();
+        $data = DB::table('p_schools__brochures')
+            ->where('school_id', $req->session()->get('school_id'))
+            ->get();
 
         if (count($data) > 0) {
             return response()->json(['success' => false, 'message' => 'You already have a brochure, delete it first.']);
@@ -74,16 +76,15 @@ class SchoolBrochureController extends Controller
     }
     // --- === Brochure Store Function === --- \\
 
-
     // --- === Brochure Remove Function === --- \\
     public function BrochureRemove(Request $req)
     {
         if ($req->input('brochure_file') != "") {
-            if (file_exists('public/portal_images/school_brochure/' .$req->input('brochure_file'))) {
-                unlink('public/portal_images/school_brochure/' .$req->input('brochure_file'));
+            if (file_exists('public/portal_images/school_brochure/' . $req->input('brochure_file'))) {
+                unlink('public/portal_images/school_brochure/' . $req->input('brochure_file'));
             }
         }
-        DB::table('p_schools__brochures')->where('brochure_id',$req->input('brochure_id'))->delete();
+        DB::table('p_schools__brochures')->where('brochure_id', $req->input('brochure_id'))->delete();
     }
     // --- === Brochure Remove Function === --- \\
 }

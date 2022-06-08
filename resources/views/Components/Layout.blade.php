@@ -63,7 +63,7 @@
         <!-- header -->
         <header class="main-header">
             <!-- logo-->
-            <a href="{{url('/')}}" class="logo-holder"><img src="{{url('public/images/cc_white_logo.png')}}" alt="" class="custom-logo-design"></a>
+            <a href="{{url('/')}}" class="logo-holder"><img src="{{url('public/images/cc_color_logo.png')}}" alt="" class="custom-logo-design"></a>
             <!-- logo end-->
             <!-- header opt -->
             @if(!Session::has('token'))

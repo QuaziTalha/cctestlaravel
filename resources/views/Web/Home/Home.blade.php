@@ -372,6 +372,8 @@
             @endif
             <!--  swiper-slide end  -->
         </div>
+        <a href="{{url('AllBlogs')}}" class="btn  dec_btn  color2-bg">Check Out All Blogs<i
+                class="fal fa-arrow-alt-right"></i></a>
     </div>
 </section>
 <!--section end-->

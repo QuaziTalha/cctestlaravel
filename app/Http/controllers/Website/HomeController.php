@@ -2,6 +2,7 @@
 
 namespace App\Http\controllers\Website;
 
+use App\Helpers\ProfileProgress;
 use App\Http\controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class HomeController extends Controller
     public function Home()
     {
         $schools = DB::table('p_schools')->orderBy('school_id', 'DESC')->take(8)->get();
-        $blogs = DB::table('p_schools__blogs')->get();
+        $blogs = DB::table('p_schools__blogs')->take(8)->get();
         return view('Web.Home.Home', ['schools' => $schools, 'blogs' => $blogs]);
     }
     // --- === Home View Function === --- \\
@@ -105,7 +106,7 @@ class HomeController extends Controller
 
         // --- === Ajax Call For Second page === --- \\
         if ($req->ajax()) {
-            $cardView = view('Components.PaginationBlogCard', ['blogs' => $blogs])->render();
+            $cardView = view('Components.PaginationBlogCard', ['lastpage' => $last_page, 'blogs' => $blogs])->render();
             return response()->json(['data' => $cardView]);
         }
         // --- === Ajax Call For Second page === --- \\
@@ -125,4 +126,13 @@ class HomeController extends Controller
         return view('Web.Home.BlogDetail', ['blogs' => $blogs]);
     }
     // ---- === Blog Detail Function === --- \\
+
+    // --- === Progress Meter Function === --- \\
+    public function ProfileProgress()
+    {
+        $percentage = \App\Helpers\ProfileProgress::instance()->ProfileProgress();
+        $progress = '<div role="progressbar" aria-valuenow="' . $percentage . '" aria-valuemin="0" aria-valuemax="100" style="--value: ' . $percentage . '"></div>';
+        return $progress;
+    }
+    // --- === Progress Meter Function === --- \\
 }

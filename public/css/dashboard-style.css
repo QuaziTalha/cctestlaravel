@@ -20,7 +20,7 @@ section.main-dashboard-sec {
 .tfp-btn {
 	position:absolute;
 	right:0;
-	top:-20px;
+	top:-97px;
 	background:#fff;
 	padding:12px 40px 12px 30px;
 	border-radius:4px;
@@ -919,7 +919,7 @@ section.main-dashboard-sec {
 .tfp-btn {
 	right:inherit;
 	left:0;
-	top:-40px;
+	top:-140px;
 }
 .tfp-det {
 	right:inherit;

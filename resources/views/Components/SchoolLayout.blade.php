@@ -40,7 +40,8 @@
         <!-- header -->
         <header class="main-header">
             <!-- logo-->
-            <a href="{{url('/')}}" class="logo-holder"><img src="{{url('public/images/cc_white_logo.png')}}" alt="" class="custom-logo-design"></a>
+            <a href="{{url('/')}}" class="logo-holder"><img src="{{url('public/images/cc_color_logo.png')}}" alt=""
+                    class="custom-logo-design"></a>
             <!-- logo end-->
             <!-- header opt -->
             @if(!Session::has('token'))
@@ -181,6 +182,7 @@
                 <!--  section  -->
                 <section class="parallax-section dashboard-header-sec gradient-bg" data-scrollax-parent="true">
                     <div class="container">
+                    <div class="tfp-btn"><span>Profile Status : </span> <strong id="progress-status"></strong></div>
                         <!--Tariff Plan menu end-->
                         <div class="dashboard-header_conatiner fl-wrap dashboard-header_title">
                             <h1>Welcome : <span>{{Session::get('school_name')}}</span></h1>
@@ -193,8 +195,8 @@
                                 <div class="dashboard-header-avatar">
                                     <img src="{{url('public/portal_images/school_logo/')}}/{{Session::get('school_logo')}}"
                                         alt="">
-                                    <a href="{{url('Schools/SchoolProfileEdit')}}/{{Session::get('token')}}" class="color-bg edit-prof_btn"><i
-                                            class="fal fa-edit"></i></a>
+                                    <a href="{{url('Schools/SchoolProfileEdit')}}/{{Session::get('token')}}"
+                                        class="color-bg edit-prof_btn"><i class="fal fa-edit"></i></a>
                                 </div>
                                 <div class="dashboard-header-stats-wrap">
                                     <div class="dashboard-header-stats">
@@ -334,9 +336,12 @@
                                     <div class="user-profile-menu">
                                         <h3>Profile</h3>
                                         <ul class="no-list-style">
-                                            <li><a href="{{url('Schools/SchoolProfileEdit')}}/{{Session::get('token')}}"><i
+                                            <li><a
+                                                    href="{{url('Schools/SchoolProfileEdit')}}/{{Session::get('token')}}"><i
                                                         class="fal fa-th-list"></i> My Profile </a></li>
-                                            <li><a href="{{url('Schools/SchoolInfrastructure')}}/{{Session::get('token')}}"><i class="fal fa-industry"></i> School Infrastructure </a></li>
+                                            <li><a
+                                                    href="{{url('Schools/SchoolInfrastructure')}}/{{Session::get('token')}}"><i
+                                                        class="fal fa-industry"></i> School Infrastructure </a></li>
                                         </ul>
                                     </div>
                                     <!-- user-profile-menu end-->
@@ -658,39 +663,17 @@
     }
 
 
-    function UserLogin() {
-        // var fields = $("input[class*='login_validation']");
-        // for (let i = 0; i <= fields.length; i++) {
-        //     if ($(fields[i]).val() === '') {
-        //         var currentElement = $(fields[i]).attr('name');
-        //         var value = currentElement.replaceAll('_', ' ');
-        //         $("#login_error").show().addClass('alert alert-danger').html('The ' + value + ' field is required.');
-        //         return false;
-        //     } else {
-        //         $("#login_error").hide().removeClass().html('');
-        //     }
-        // }
-
+    function ProfileProgress() {
         $.ajax({
-            type: "POST",
-            url: "{{url('UserLogin')}}",
-            data: $("#UserLogin").serialize(),
-            beforeSend: function() {
-                $(".btn-load").prop('disabled', true)
-            },
+            type: "GET",
+            url: "{{url('ProfileProgress')}}",
             success: function(data) {
-                $(".btn-load").prop('disabled', false)
-                if (data['success'] == true) {
-                    $("#login_error").show().addClass('alert alert-success').html(data['message']);
-                    location.reload();
-                } else if (data['validate'] == true) {
-                    $("#login_error").show().addClass('alert alert-danger').html(data['message'][0]);
-                } else {
-                    $("#login_error").show().addClass('alert alert-danger').html(data['message']);
-                }
+                console.log(data);
+                $("#progress-status").html(data)
             }
         })
     }
+    ProfileProgress()
     </script>
 </body>
 

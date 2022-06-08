@@ -79,24 +79,20 @@
 // --- === Pagination Function === --- \\
 var current_page = 1;
 var lastpage = "{{$lastpage ?? ''}}";
-if (current_page >= lastpage) {
-    $(".btn-custom").hide();
-}
 
 function PaginateMore() {
     current_page++;
     if (current_page >= lastpage) {
         $(".btn-custom").hide();
-    } else {
-        $.ajax({
-            type: "GET",
-            url: "{{url('/')}}/AllSchoolList?page=" + current_page,
-            success: function(data) {
-                console.log(data);
-                $(".pagination-append").append(data.data);
-            }
-        })
     }
+    $.ajax({
+        type: "GET",
+        url: "{{url('/')}}/AllBlogs?page=" + current_page,
+        success: function(data) {
+            console.log(data);
+            $(".pagination-append").append(data.data);
+        }
+    })
 }
 // --- === Pagination Function === --- \\
 </script>
