@@ -62,9 +62,9 @@
             <!-- /Left Text -->
             <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center">
                 <div class="flex-row text-center mx-auto">
-                    <img src="{{url('public/assets/img/pages/login-light.png')}}" alt="Auth Cover Bg color" width=" 520"
-                        class="img-fluid authentication-cover-img" data-app-light-img="pages/login-light.png"
-                        data-app-dark-img="pages/login-dark.png">
+                    <img src="{{url('public/assets/img/pages/cc-log-bg.png')}}" alt="Auth Cover Bg color" width=" 520"
+                        class="img-fluid authentication-cover-img" data-app-light-img="pages/cc-log-bg.png"
+                        data-app-dark-img="pages/cc-log-bg.png">
                     <div class="mx-auto">
                         <h3>Campus Connect Admin Login</h3>
                     </div>
@@ -85,7 +85,7 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Campus Connect Admin Login {{Session::get('admin_name')}}</h4>
+                    <h4 class="mb-2">Campus Connect Admin Login</h4>
                     <p class="mb-4">Please sign-in to your account and start the admin</p>
 
                     <form id="AdminLoginForm" class="mb-3">

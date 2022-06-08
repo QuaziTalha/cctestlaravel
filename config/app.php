@@ -162,6 +162,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // -- === Data Table == --- \\
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        // -- === Data Table == --- \\
+
         /*
          * Package Service Providers...
          */

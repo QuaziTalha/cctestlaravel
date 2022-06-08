@@ -306,6 +306,17 @@ text {
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+    <script src="{{url('public/assets/vendor/libs/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-responsive/datatables.responsive.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-buttons/datatables-buttons.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/jszip/jszip.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/pdfmake/pdfmake.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-buttons/buttons.html5.js')}}"></script>
+    <script src="{{url('public/assets/vendor/libs/datatables-buttons/buttons.print.js')}}"></script>
     <script src="{{url('public/assets/vendor/libs/popper/popper.js')}}"></script>
     <script src="{{url('public/assets/vendor/js/bootstrap.js')}}"></script>
     <script src="{{url('public/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>

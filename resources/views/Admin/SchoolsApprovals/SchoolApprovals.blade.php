@@ -77,12 +77,12 @@ function GetSchoolData() {
                 "orderable": false,
             },
             {
-                data: 'school_address ',
+                data: 'school_address',
                 "searchable": true,
                 "orderable": false,
             },
             {
-                data: 'actions',
+                data: 'action',
                 "searchable": true,
                 "orderable": false,
             },
