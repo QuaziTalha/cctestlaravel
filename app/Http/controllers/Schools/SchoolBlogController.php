@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Schools;
+namespace App\Http\controllers\Schools;
 
 use App\Http\controllers\Controller;
 use DB;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\SchoolsApprovals;
+namespace App\Http\controllers\Admin\SchoolsApprovals;
 
-use App\Http\Controllers\Controller;
+use App\Http\controllers\Controller;
 use DataTables;
 use DB;
 use Illuminate\Http\Request;

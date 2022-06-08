@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\BlogsApprovals;
+namespace App\Http\controllers\Admin\BlogsApprovals;
 
-use App\Http\Controllers\Controller;
+use App\Http\controllers\Controller;
 use Illuminate\Http\Request;
 
 class BlogApprovalController extends Controller

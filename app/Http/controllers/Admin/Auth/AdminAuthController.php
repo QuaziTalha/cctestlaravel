@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\controllers\Admin\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 
