@@ -24,11 +24,14 @@ use App\Http\controllers\Schools\SchoolInfrastructure;
 use App\Http\controllers\Schools\SchoolBlogController;
 use App\Http\controllers\Auth\AccountsController;
 use App\Http\controllers\Website\HomeController;
+use App\Http\controllers\VerificationController;
 
 
 // ---- === Admin Controller === ---\\
 use App\Http\controllers\Admin\Auth\AdminAuthController;
 use App\Http\controllers\Admin\Dashboard\DashboardController;
+use App\Http\controllers\Admin\Merchandise\MerchandiseController;
+use App\Http\controllers\Admin\Scholarships\ScholarshipsController;
 use App\Http\controllers\Admin\SchoolsApprovals\SchoolApprovalController;
 use App\Http\controllers\Admin\BlogsApprovals\BlogApprovalController;
 // ---- === Admin Controller === ---\\
@@ -38,7 +41,8 @@ use App\Http\controllers\Admin\BlogsApprovals\BlogApprovalController;
 // --- === Globale Function For All Routes === --- \\
 View::composer(['*'], function ($view) {
     $total_count = DB::table('p_schools')->where('p_schools.school_token', Session::get('token'))->get();
-        $row = '';
+    $blogs = DB::table('p_schools__blogs')->orderBy('blog_id', 'desc')->get();
+    $row = '';
         foreach ($total_count as $data) {
             $row = $data;
             $row->brochure = DB::table('p_schools__brochures')->where('school_id', $row->school_id)->get();
@@ -48,19 +52,31 @@ View::composer(['*'], function ($view) {
             $row->eligibility = DB::table('p_schools__eligibilities')->where('school_id', $row->school_id)->get();
         }
 
-    $view->with(['count_data' => $row]);
+    $view->with(['count_data' => $row, 'blogs' => $blogs]);
 });
 // --- === Globale Function For All Routes === --- \\
 
 // --- === Website Routes === --- \\
 Route::get('/', [HomeController::class, 'Home']);
+Route::get('/AboutUs', [HomeController::class, 'AboutUs']);
 Route::get('SchoolDetail/{school_slug}', [HomeController::class, 'SchoolDetail']);
 Route::get('SchoolSearch', [HomeController::class, 'SchoolSearch']);
 Route::get('AllSchoolList', [HomeController::class, 'AllSchoolList']);
 Route::get('AllBlogs', [HomeController::class, 'AllBlogs']);
 Route::get('BlogDetail/{blog_id}', [HomeController::class, 'BlogDetail']);
+Route::get('AllMerchandise', [HomeController::class, 'AllMerchandise']);
+Route::get('MerchandiseDetail/{merchandise_id}', [HomeController::class, 'MerchandiseDetail']);
+Route::get('AllScholarship', [HomeController::class, 'AllScholarship']);
+Route::get('ScholarshipDetail/{scholarship_id}', [HomeController::class, 'ScholarshipDetail']);
 Route::get('ProfileProgress', [HomeController::class, 'ProfileProgress']);
+
 // --- === Website Routes === --- \\
+
+// --- === Verification Routes === --- \\
+Route::get('Verification/{school_token}', [VerificationController::class, 'Verification']);
+Route::get('SendOTP', [VerificationController::class, 'SendOTP'])->name('SendOTP');
+Route::get('VerifyOTP', [VerificationController::class, 'VerifyOTP'])->name('VerifyOTP');
+// --- === Verification Routes === --- \\
 
 Route::post('UserLogin', [AccountsController::class, 'UserLogin']);
 Route::post('UserRegister', [AccountsController::class, 'UserRegister']);
@@ -113,12 +129,12 @@ Route::group(['prefix' => 'Schools', 'middleware' => 'UserMiddleware'], function
     Route::post('FacilityStore', [FacilityController::class, 'FacilityStore'])->name('FacilityStore');
     Route::get('FacilityRemove', [FacilityController::class, 'FacilityRemove'])->name('FacilityRemove');
     // --- === School Facility === --- \\
-    
+
     // --- === School Infrastructure === --- \\
     Route::get('SchoolInfrastructure/{token}', [SchoolInfrastructure::class, 'SchoolInfrastructureView']);
     Route::post('InfrastructureUpdate', [SchoolInfrastructure::class, 'InfrastructureUpdate'])->name('InfrastructureUpdate');
     // --- === School Infrastructure === --- \\
-    
+
     // --- === School Blog === --- \\
     Route::get('SchoolBlog/{token}', [SchoolBlogController::class, 'SchoolBlog']);
     Route::get('GetBlogs', [SchoolBlogController::class, 'GetBlogs'])->name('GetBlogs');
@@ -139,11 +155,42 @@ Route::group(['prefix' => 'Admin', 'middleware' => 'AdminMiddleware'], function 
     // --- === Admin Dashboard === --- \\
     Route::get('Dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
     // --- === Admin Dashboard === --- \\
-    
+
     // --- === School Approval Route === --- \\
     Route::get('SchoolsApprovals', [SchoolApprovalController::class, 'SchoolsApprovals'])->name('SchoolsApprovals');
     Route::get('GetSchoolList', [SchoolApprovalController::class, 'GetSchoolList'])->name('GetSchoolList');
+    Route::get('SchoolDetails/{school_token}', [SchoolApprovalController::class, 'SchoolDetails'])->name('SchoolDetails');
+    Route::get('ApproveSchool', [SchoolApprovalController::class, 'ApproveSchool'])->name('ApproveSchool');
+    Route::get('DisapproveSchool', [SchoolApprovalController::class, 'DisapproveSchool'])->name('DisapproveSchool');
     // --- === School Approval Route === --- \\
+
+    // --- === Blog Approval Route === --- \\
+    Route::get('BlogsApprovals', [BlogApprovalController::class, 'BlogsApprovals'])->name('BlogsApprovals');
+    Route::get('GetBlogList', [BlogApprovalController::class, 'GetBlogList'])->name('GetBlogList');
+    Route::get('ApproveBlog', [BlogApprovalController::class, 'ApproveBlog'])->name('ApproveBlog');
+    Route::get('DisapproveBlog', [BlogApprovalController::class, 'DisapproveBlog'])->name('DisapproveBlog');
+    // --- === Blog Approval Route === --- \\
+
+    // --- === Merchandise Route === --- \\
+    Route::get('Merchandiser', [MerchandiseController::class, 'Merchandiser'])->name('Merchandiser');
+    Route::get('Merchandise', [MerchandiseController::class, 'Merchandise'])->name('Merchandise');
+    Route::get('GetMerchandiseList', [MerchandiseController::class, 'GetMerchandiseList'])->name('GetMerchandiseList');
+    Route::post('MerchandiseStore', [MerchandiseController::class, 'MerchandiseStore'])->name('MerchandiseStore');
+    Route::get('MerchandiseDelete', [MerchandiseController::class, 'MerchandiseDelete'])->name('MerchandiseDelete');
+    Route::get('GetMerchandiserList', [MerchandiseController::class, 'GetMerchandiserList'])->name('GetMerchandiserList');
+    Route::post('MerchandiserStore', [MerchandiseController::class, 'MerchandiserStore'])->name('MerchandiserStore');
+    Route::get('MerchandiserDelete', [MerchandiseController::class, 'MerchandiserDelete'])->name('MerchandiserDelete');
+    Route::get('Test', function () {
+        return view('Admin.test');
+    });
+    // --- === Merchandise Route === --- \\
+
+    // --- === Scholarships Route === --- \\
+    Route::get('Scholarships', [ScholarshipsController::class, 'Scholarships'])->name('Scholarships');
+    Route::get('GetScholarshipList', [ScholarshipsController::class, 'GetScholarshipList'])->name('GetScholarshipList');
+    Route::post('ScholarshipStore', [ScholarshipsController::class, 'ScholarshipStore'])->name('ScholarshipStore');
+    Route::get('ScholarshipDelete', [ScholarshipsController::class, 'ScholarshipDelete'])->name('ScholarshipDelete');
+    // --- === Scholarships Route === --- \\
 });
 
 // --- === Campus Connect Portal End === --- \\

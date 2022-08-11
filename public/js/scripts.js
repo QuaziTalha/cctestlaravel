@@ -652,6 +652,12 @@ function initTowhub() {
         $(".modal_main").addClass("vis_mr");
         $("html, body").addClass("hid-body");
     });
+    $('.modal-open-2').on("click", function (e) {
+        e.preventDefault();
+        $('.modal_2 , .reg-overlay_2').fadeIn(200);
+        $(".modal_main_2").addClass("vis_mr");
+        $("html, body").addClass("hid-body");
+    });
     $('.close-reg , .reg-overlay').on("click", function () {
         modal.hide();
     });

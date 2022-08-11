@@ -11,11 +11,11 @@
             <div class="geodir-category-content fl-wrap title-sin_item">
                 <div class="geodir-category-content-title fl-wrap">
                     <div class="geodir-category-content-title-item">
-                        <h3 class="title-sin_map"><a href="{{url('BlogDetail')}}/{{$data->blog_id ?? ''}}">{{Str::limit($data->blog_title,30,'..')  ?? ''}}</a></h3>
+                        <h3 class="title-sin_map"><a href="{{url('BlogDetail')}}/{{$data->blog_id ?? ''}}">{{Str::limit($data->blog_title,55,'..')  ?? ''}}</a></h3>
                     </div>
                 </div>
-                <div class="geodir-category-text fl-wrap">
-                    <p class="small-text">{{strip_tags(Str::limit($data->blog_description,100,'..')  ?? '')}}</p>
+                <div class="geodir-category-text fl-wrap" style="height: 60px;">
+                    <p class="small-text" style="word-break: break-all;">{{strip_tags(Str::limit($data->blog_description,80,'..')  ?? '')}}</p>
                 </div>
             </div>
         </article>

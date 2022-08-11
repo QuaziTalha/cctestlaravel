@@ -6,7 +6,8 @@
                 <div class="geodir-category-img">
                     <a href="{{url('SchoolDetail')}}/{{$data->school_slug ?? ''}}"
                         class="geodir-category-img-wrap fl-wrap">
-                        <img src="{{url('public/portal_images/school_images')}}/{{$data->school_image ?? ''}}" alt="">
+                        <img src="{{url('public/portal_images/school_images')}}/
+                        {{$data->school_image ?? 'NotFound'}}" alt="">
                     </a>
                     <div class="geodir-category-opt">
                         <div class="geodir-category-opt_title">
@@ -28,7 +29,7 @@
                                 <span class="price-name-tooltip">Pricey</span>
                             </div>
                             <div class="post-author"><a href="#"><img
-                                        src="{{url('public/portal_images/school_logo')}}/{{$data->school_logo ?? ''}}"
+                                        src="{{url('public/portal_images/school_logo')}}/{{$data->school_logo ?? 'NotFound'}}"
                                         alt=""><span>By ,
                                         {{Str::limit($data->school_name,16,'..')  ?? ''}}</span></a></div>
                         </div>

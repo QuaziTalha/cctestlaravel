@@ -17,6 +17,8 @@
     <link type="text/css" rel="stylesheet" href="{{url('public/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{url('public/css/color.css')}}">
     <link type="text/css" rel="stylesheet" href="{{url('public/css/cropper.css')}}">
+    {{-- <link rel="stylesheet" href="{{url('public/assets/vendor/fonts/fontawesome.css')}}" /> --}}
+    
     <!--=============== favicons ===============-->
     <link rel="shortcut icon" href="{{url('public/images/favicon.ico')}}">
 
@@ -84,8 +86,7 @@
             @if(!Session::has('token'))
             @if(!request()->is('SchoolRegistration'))
             @if(!Session::has('user_id'))
-            <div class="show-reg-form modal-open avatar-img" data-srcav="{{url('public/images/avatar/3.jpg')}}"><i
-                    class="fal fa-user"></i>Sign In</div>
+            <div class="userslogin show-reg-form modal-open avatar-img" data-srcav="{{url('public/images/avatar/3.jpg')}}"><i class="fal fa-user"></i>Sign In</div>
             @else
             <div class="header-user-menu">
                 <div class="header-user-name">
@@ -110,12 +111,45 @@
                 <nav>
                     <ul class="no-list-style">
                         <li><a href="{{url('/')}}">Home </a></li>
-                        <li><a href="javascript:void(0)">About</a></li>
+                        <li><a href="{{url('/AboutUs')}}">About</a></li>
                         <li><a href="{{url('AllSchoolList')}}">Schools </a></li>
-                        <li><a href="javascript:void(0)">Merchandisers</a></li>
-                        <li><a href="javascript:void(0)">Scholarship</a></li>
+                        <li><a href="{{url('AllMerchandise')}}">Merchandisers</a></li>
+                        <li><a href="{{url('AllScholarship')}}">Scholarship</a></li>
                         <li><a href="{{url('AllBlogs')}}">Blogs</a></li>
                         <li><a href="javascript:void(0)">Contact</a></li>
+                  
+                        
+                        @if(!Session::has('token'))
+                        <li class="dropdownsignin"><a href="{{url('SchoolRegistration')}}" class="color-bg">School Registeration / Login<span><i class="fal fa-layer-plus"></i></span></a></li>
+                        @else
+                            <li>
+                            <ul>
+                                <li class="dropdownsignin"><i class="fal fa-user"></i> {{Str::limit(Session::get('school_name'),13,'...')}}</li>
+                                <li class="dropdownsignin"><a href="{{url ('UserLogout')}}">Log Out</a></li>
+                            </ul>
+                            </li>
+                        @endif
+            
+                        @if(!Session::has('token'))
+                        @if(!request()->is('SchoolRegistration'))
+                        @if(!Session::has('user_id'))
+
+                        <li class="dropdownsignin modal-open" data-srcav="{{url('public/images/avatar/3.jpg')}}"><i class="fal fa-user"></i>Sign In</li>
+
+                        @else
+                    <li class="dropdownsignin">
+                          
+                            <ul>
+                                <!-- <li><a href="dashboard-myprofile.html"> Edit profile</a></li> -->
+                                <li class="dropdownsignin"><i class="fal fa-user"></i> {{Str::limit(Session::get('user_name'),13,'...')}}</li>
+                                <li class="dropdownsignin"><a href="{{url ('UserLogout')}}">Log Out</a></li>
+                            </ul>
+                    
+                    </li>
+                        @endif
+                        @endif
+                        @endif
+                       
                     </ul>
                 </nav>
             </div>
@@ -250,7 +284,21 @@
                                 <h3>Our Last Blog</h3>
                                 <div class="footer-widget-posts fl-wrap">
                                     <ul class="no-list-style">
+                                        @if(!empty($blogs))
+                                        @for ($i = 0; $i < 3; $i++)
                                         <li class="clearfix">
+                                            <a href="{{url('BlogDetail')}}/{{$blogs[$i]->blog_id ?? ''}}" class="widget-posts-img"><img
+                                                    src="{{url('public/portal_images/blog_images/'.$blogs[$i]->blog_image)}}" class="respimg" alt=""></a>
+                                            <div class="widget-posts-descr">
+                                                <a href="{{url('BlogDetail')}}/{{$blogs[$i]->blog_id ?? ''}}" title="">{{$blogs[$i]->blog_title}}</a>
+                                                <span class="widget-posts-date"><i class="fal fa-calendar"></i> 21 {{$blogs[$i]->blog_date}}</span>
+                                            </div>
+                                        </li>
+                                    @endfor
+                                    @else
+                                    <h3>There is no blog uploaded.</h3>
+                                    @endif
+                                    {{--     <li class="clearfix">
                                             <a href="#" class="widget-posts-img"><img
                                                     src="{{url('public/images/all/4.jpg')}}" class="respimg" alt=""></a>
                                             <div class="widget-posts-descr">
@@ -258,8 +306,8 @@
                                                 <span class="widget-posts-date"><i class="fal fa-calendar"></i> 21 Mar
                                                     09.05 </span>
                                             </div>
-                                        </li>
-                                        <li class="clearfix">
+                                        </li> --}}
+                                      {{--   <li class="clearfix">
                                             <a href="#" class="widget-posts-img"><img
                                                     src="{{url('public/images/all/2.jpg')}}" class="respimg" alt=""></a>
                                             <div class="widget-posts-descr">
@@ -276,9 +324,9 @@
                                                 <span class="widget-posts-date"><i class="fal fa-calendar"></i> 7 Mar
                                                     16.42 </span>
                                             </div>
-                                        </li>
+                                        </li> --}}
                                     </ul>
-                                    <a href="blog.html" class="footer-link">Read all <i
+                                    <a href="{{url('AllBlogs')}}" class="footer-link">Read all <i
                                             class="fal fa-long-arrow-right"></i></a>
                                 </div>
                             </div>

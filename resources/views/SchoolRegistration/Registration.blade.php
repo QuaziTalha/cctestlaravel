@@ -44,7 +44,7 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>UDISE Code <i class="fal fa-school"></i> </label>
-                                                            <input type="text" class="required" placeholder="UDISE Code"
+                                                            <input type="text" placeholder="UDISE Code"
                                                                 name="udise_code" id="udise_code" />
                                                         </div>
                                                         <div class="col-sm-6">
@@ -414,10 +414,13 @@ function LoginSchool() {
             if (data['success'] == true) {
                 $("#log_error").show().addClass('alert alert-success').html(data['message']);
                 window.location.href = "{{url('/')}}/Schools/SchoolProfile/" + data['token'] + "";
+                $(".register-btn").prop('disabled', false)
             } else if (data['validate'] == true) {
                 $("#log_error").show().addClass('alert alert-danger').html(data['message'][0]);
+                $(".register-btn").prop('disabled', false)
             } else {
                 $("#log_error").show().addClass('alert alert-danger').html(data['message']);
+                $(".register-btn").prop('disabled', false)
             }
         }
 

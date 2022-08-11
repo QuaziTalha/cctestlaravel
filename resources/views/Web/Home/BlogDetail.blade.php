@@ -1,5 +1,5 @@
 @extends('Components.Layout')
-@section('title','Blog -'. $blogs[0]->blog_title ?? '')
+@section('title','Blog -'. $blog[0]->blog_title ?? '')
 @section('content')
 
 <!-- === BLog Detail ===  -->
@@ -24,9 +24,9 @@
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper lightgallery">
                                             <div class="swiper-slide hov_zoom"><img
-                                                    src="{{url('/')}}/public/portal_images/blog_images/{{$blogs[0]->blog_image ?? ''}}"
+                                                    src="{{url('/')}}/public/portal_images/blog_images/{{$blog[0]->blog_image ?? ''}}"
                                                     alt=""><a
-                                                    href="{{url('/')}}/public/portal_images/blog_images/{{$blogs[0]->blog_image ?? ''}}"
+                                                    href="{{url('/')}}/public/portal_images/blog_images/{{$blog[0]->blog_image ?? ''}}"
                                                     class="box-media-zoom   popup-image"><i
                                                         class="fal fa-search"></i></a></div>
                                         </div>
@@ -35,20 +35,22 @@
                             </div>
                         </div>
                         <div class="list-single-main-item fl-wrap block_box">
-                            <h2 class="post-opt-title"><a href="javascript:void(0)">{{$blogs[0]->blog_title ?? ''}}</a>
+                            <h2 class="post-opt-title"><a href="javascript:void(0)">{{$blog[0]->blog_title ?? ''}}</a>
                             </h2>
                             <div class="post-author"><a href="#"><img
-                                        src="{{url('public/portal_images/school_logo')}}/{{$blogs[0]->school_logo ?? ''}}"
-                                        alt=""><span>{{$blogs[0]->school_name ?? ''}}</span></a></div>
+                                        src="{{url('public/portal_images/school_logo')}}/{{$blog[0]->school_logo ?? ''}}"
+                                        alt=""><span>{{$blog[0]->school_name ?? ''}}</span></a></div>
                             <div class="post-opt">
                                 <ul class="no-list-style">
-                                    <li><i class="fal fa-calendar"></i> <span>{{$blogs[0]->blog_date ?? ''}}</span></li>
+                                    <li><i class="fal fa-calendar"></i> <span>{{$blog[0]->blog_date ?? ''}}</span></li>
                                     </li>
                                 </ul>
                             </div>
                             <span class="fw-separator"></span>
                             <div class="clearfix"></div>
-                            {{strip_tags($blogs[0]->blog_description ?? '')}}
+                            <div id="description">{!! $blog[0]->blog_description !!}</div>
+                            {{-- <script>$("#description").html()</script> --}}
+
                             <span class="fw-separator"></span>
                         </div>
                     </article>

@@ -41,13 +41,13 @@ class SchoolController extends Controller
         // --- === Validation === --- \\
         $validator = Validator::make($req->all(), [
             'school_name' => 'bail|required',
-            'syllabus_type' => 'required',
-            'min_fees' => 'required|numeric',
-            'max_fees' => 'required|numeric',
-            'school_contact_number' => 'required|numeric|digits:10',
-            'primary_mobile_number' => 'required|numeric|digits:10',
-            'school_email' => 'required|email',
-            'school_password' => 'required|min:4',
+            // 'syllabus_type' => 'required',
+            // 'min_fees' => 'required|numeric',
+            // 'max_fees' => 'required|numeric',
+            // 'school_contact_number' => 'required|numeric|digits:10',
+            // 'primary_mobile_number' => 'required|numeric|digits:10',
+            // 'school_email' => 'required|email',
+            // 'school_password' => 'required|min:4',
             // 'school_logo' => 'image|mimes:jpeg,png',
             // 'school_image' => 'image|mimes:jpeg,png',
         ]);

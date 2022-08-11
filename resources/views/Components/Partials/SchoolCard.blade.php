@@ -4,10 +4,22 @@
         <article class="geodir-category-listing fl-wrap">
             <div class="geodir-category-img">
                 <a href="{{url('SchoolDetail')}}/{{$data->school_slug ?? ''}}" class="geodir-category-img-wrap fl-wrap">
-                    <img src="{{url('public/portal_images/school_images')}}/{{$data->school_image ?? ''}}" alt="">
+                    <div style="height: 205px; width: 100%; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{url('public/portal_images/school_images')}}/{{$data->school_image ?? ''}}');">
+
+                    </div>
+             {{--        <img src="{{url('public/portal_images/school_images')}}/{{$data->school_image ?? ''}}" 
+                    onerror="this.onerror=null; this.src='{{url('public/images/image-not-found.png')}}'"
+                    alt=""> --}}
                 </a>
-                <div class="listing-avatar"><a href="author-single.html"><img
-                            src="{{url('public/portal_images/school_logo')}}/{{$data->school_logo ?? ''}}" alt=""></a>
+                <div class="listing-avatar"><a href="author-single.html">
+                   {{--  <img src="{{url('public/portal_images/school_logo')}}/{{$data->school_logo ?? ''}}"  onerror="this.onerror=null; this.src='{{url('public/images/image-not-found.png')}}'"
+  alt=""> --}}
+  <div style="height: 50px; width: 50px;     box-shadow: 0px 0px 0px 6px rgb(255 255 255);
+  border-radius: 100%;
+  position: relative;
+  z-index: 2; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{url('public/portal_images/school_logo')}}/{{$data->school_logo ?? ''}}');">
+  </div>
+                </a>
                     <span class="avatar-tooltip">Added By <strong>{{Str::limit($data->school_name,10,'..')  ?? ''}}</strong></span>
                 </div>
             </div>
@@ -15,7 +27,7 @@
                 <div class="geodir-category-content-title fl-wrap">
                     <div class="geodir-category-content-title-item">
                         <h3 class="title-sin_map"><a href="{{url('SchoolDetail')}}/{{$data->school_slug ?? ''}}">{{Str::limit($data->school_name,18,'..')  ?? ''}}</a></h3>
-                        <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>{{Str::limit($data->school_address,35,'..')  ?? ''}} </a></div>
+                        <div class="geodir-category-location fl-wrap"><a><i class="fas fa-map-marker-alt"></i>{{Str::limit($data->school_address,35,'..')  ?? ''}} </a></div>
                     </div>
                 </div>
                 <div class="geodir-category-text fl-wrap h-custom-auto">

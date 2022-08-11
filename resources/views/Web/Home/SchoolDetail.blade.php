@@ -14,27 +14,66 @@
         <div class="list-single-header-item  fl-wrap">
             <div class="row">
                 <div class="col-md-9">
-                    <h1>{{$schools->school_name ?? ''}} <span class="verified-badge"><i class="fal fa-check"></i></span>
+                    <h1><div class="list-single-author"><span class="author_avatar" style="width: 46px;height: 46px;"> <img alt='' src="{{url('/')}}/public/portal_images/school_logo/{{$schools->school_logo ?? ''}}" style="width: 46px;height: 46px;">
+                    </span></div>{{$schools->school_name ?? ''}} 
+                    
+                        @if ($schools->school_status == 1)
+                        <span class="verified-badge"><i class="fal fa-check"></i></span>
+                    @else
+                    <span class="verified-badge" style="background: #ff5b5c;"><i class="fal fa-times"></i></span>
+                    @endif
                     </h1>
                     <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>
                             {{$schools->school_address ?? ''}},{{$schools->school_city ?? ''}}
                             {{$schools->school_pin_code ?? ''}}</a> <a href="#"> <i
                                 class="fal fa-phone"></i>{{$schools->school_contact_number ?? ''}}</a> <a href="#"><i
                                 class="fal fa-envelope"></i> {{$schools->school_email ?? ''}}</a></div>
+                                
+                                    <a class="btn color2-bg float-btn {{-- modal-open-2 --}}" href="{{url('Verification/'.$schools->school_token)}}">Claim this School<i class="fal fa-chevron-right"></i></a>
+                                
                 </div>
             </div>
         </div>
         <div class="list-single-header_bottom fl-wrap">
-            <a class="listing-item-category-wrap" href="#">
-                <div class="listing-item-category  red-bg"><i class="fal fa-school"></i></div>
-                <span>School</span>
-            </a>
-            <div class="list-single-author"> <a href="javascript:void(0)"><span class="author_avatar"> <img alt=''
-                            src="{{url('/')}}/public/portal_images/school_logo/{{$schools->school_logo ?? ''}}">
-                    </span>{{Str::limit($schools->school_name,10,'..')  ?? ''}}</a></div>
+          
         </div>
     </div>
 </section>
+
+{{-- verification --}}
+ <div class="main-register-wrap modal_2">
+    <div class="reg-overlay_2"></div>
+    <div class="main-register-holder tabs-act">
+        <div class="main-register fl-wrap  modal_main_2">
+            <div class="main-register_title">Claim {{$schools->school_name ?? ''}} 
+            </div>
+            <div class="close-reg close-2"><i class="fal fa-times"></i></div>
+           {{--  <ul class="tabs-menu fl-wrap no-list-style">
+                <li class="current"><a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="#tab-2"><i class="fal fa-user-plus"></i> Register</a></li>
+            </ul> --}}
+            <!--tabs -->
+            <div class="tabs-container">
+          
+                        <div class="custom-form">
+                        <p>Sent an OTP to registered Email Adress</p>
+                        <br/>
+                            <button type="button" style="width: 100%" class="btn-load btn float-btn color2-bg"
+                                onclick="UserLogin()">
+                                Login <i class="fas fa-caret-right"></i></button>
+                        </div>
+              
+                <!--tabs end -->
+                <div class="wave-bg">
+                    <div class='wave -one'></div>
+                    <div class='wave -two'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- verification --}}
+
 <!-- scroll-nav-wrapper-->
 <div class="scroll-nav-wrapper fl-wrap">
     <div class="container">

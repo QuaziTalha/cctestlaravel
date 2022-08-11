@@ -413,7 +413,7 @@ $(".crop-img-btn-2").click(function(e) {
 
 function RegisterSchool() {
 
-    var fields = $("input[class*='required']");
+    /* var fields = $("input[class*='required']");
     for (let i = 0; i <= fields.length; i++) {
         if ($(fields[i]).val() === '') {
             var currentElement = $(fields[i]).attr('id');
@@ -423,7 +423,7 @@ function RegisterSchool() {
         } else {
             $("#error").hide().removeClass().html('');
         }
-    }
+    } */
 
 
     const form = document.querySelector('.SchoolRegisterForm');
@@ -460,8 +460,10 @@ function RegisterSchool() {
                 location.reload();
             } else if (data['validate'] == true) {
                 $("#error").show().addClass('alert alert-danger').html(data['message'][0]);
+                $(".register-btn").prop('disabled', false)
             } else {
                 $("#error").show().addClass('alert alert-danger').html(data['message']);
+                $(".register-btn").prop('disabled', false)
             }
         }
     })

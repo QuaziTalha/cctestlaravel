@@ -13,10 +13,17 @@ class HomeController extends Controller
     public function Home()
     {
         $schools = DB::table('p_schools')->orderBy('school_id', 'DESC')->take(8)->get();
-        $blogs = DB::table('p_schools__blogs')->take(8)->get();
-        return view('Web.Home.Home', ['schools' => $schools, 'blogs' => $blogs]);
+        $merchandise = DB::table('p_schools__merchandise')->take(8)->get();
+        return view('Web.Home.Home', ['schools' => $schools, 'merchandise' => $merchandise]);
     }
     // --- === Home View Function === --- \\
+
+    // --- === About View Function === --- \\
+    public function AboutUs()
+    {
+        return view('Web.Home.AboutUs');
+    }
+    // --- === About View Function === --- \\
 
     // --- === School Deatile Function === --- \\
     public function SchoolDetail($school_slug)
@@ -122,10 +129,52 @@ class HomeController extends Controller
             ->select('p_schools__blogs.*', 'p_schools.school_name', 'p_schools.school_logo')
             ->leftjoin('p_schools', 'p_schools.school_id', 'p_schools__blogs.school_id')
             ->where('blog_id', $blog_id)->get();
-
-        return view('Web.Home.BlogDetail', ['blogs' => $blogs]);
+//  return $blogs;
+        // return $blogs[0]->blog_description;
+        return view('Web.Home.BlogDetail', ['blog' => $blogs]);
     }
     // ---- === Blog Detail Function === --- \\
+
+    // --- === All School Merchandise View Function === --- \\
+    public function AllMerchandise(Request $req)
+    {
+        $merchandise = DB::table('p_schools__merchandise')->get();
+        // return $merchandise;
+        return view('Web.Home.AllMerchandise', ['merchandise' => $merchandise]);
+    }
+    // --- === All School Merchandise View Function === --- \\
+
+     // ---- === merchandise Detail Function === --- \\
+     public function MerchandiseDetail($merchandise_id)
+     {
+         $merchandise = DB::table('p_schools__merchandise')
+             ->where('merchandise_id', $merchandise_id)
+             ->get();
+        // return $merchandise;
+         return view('Web.Home.MerchandiseDetail', ['merchandise' => $merchandise]);
+     }
+     // ---- === merchandise Detail Function === --- \\
+
+
+    // --- === All School scholarship View Function === --- \\
+    public function AllScholarship(Request $req)
+    {
+        $scholarship = DB::table('p_schools__scholarships')->get();
+        // return $scholarship;
+        return view('Web.Home.AllScholarship', ['scholarship' => $scholarship]);
+    }
+    // --- === All School scholarship View Function === --- \\
+
+     // ---- === scholarship Detail Function === --- \\
+     public function ScholarshipDetail($scholarship_id)
+     {
+         $scholarship = DB::table('p_schools__scholarships')
+             ->where('scholarship_id', $scholarship_id)
+             ->get();
+        // return $scholarship;
+         return view('Web.Home.scholarshipDetail', ['scholarship' => $scholarship]);
+     }
+     // ---- === scholarship Detail Function === --- \\
 
     // --- === Progress Meter Function === --- \\
     public function ProfileProgress()
@@ -135,4 +184,5 @@ class HomeController extends Controller
         return $progress;
     }
     // --- === Progress Meter Function === --- \\
+
 }

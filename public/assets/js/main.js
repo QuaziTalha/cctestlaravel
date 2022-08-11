@@ -3,9 +3,9 @@ let isRtl = window.Helpers.isRtl(),
     isDarkStyle = window.Helpers.isDarkStyle(),
     menu, animate, isHorizontalLayout = !1;
 document.getElementById("layout-menu") && (isHorizontalLayout = document.getElementById("layout-menu").classList.contains("menu-horizontal")),
-    function () {
+    function() {
         let e = document.querySelectorAll("#layout-menu"),
-            t = (e.forEach(function (e) {
+            t = (e.forEach(function(e) {
                 menu = new Menu(e, {
                     orientation: isHorizontalLayout ? "horizontal" : "vertical",
                     closeChildren: !!isHorizontalLayout,
@@ -18,24 +18,24 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                         localStorage.setItem("templateCustomizer-" + templateName + "--LayoutCollapsed", String(window.Helpers.isCollapsed()))
                     } catch (e) {}
                 })
-            }), window.Helpers.swipeIn(".drag-target", function (e) {
+            }), window.Helpers.swipeIn(".drag-target", function(e) {
                 window.Helpers.setCollapsed(!1)
-            }), window.Helpers.swipeOut("#layout-menu", function (e) {
+            }), window.Helpers.swipeOut("#layout-menu", function(e) {
                 window.Helpers.isSmallScreen() && window.Helpers.setCollapsed(!0)
             }), document.getElementsByClassName("menu-inner")),
             o = document.getElementsByClassName("menu-inner-shadow")[0],
-            s = (0 < n.length && o && n[0].addEventListener("ps-scroll-y", function () {
+            s = (0 < n.length && o && n[0].addEventListener("ps-scroll-y", function() {
                 this.querySelector(".ps__thumb-y").offsetTop ? o.style.display = "block" : o.style.display = "none"
             }), document.querySelector(".style-switcher-toggle"));
 
         function a(n) {
             const e = [].slice.call(document.querySelectorAll("[data-app-" + n + "-img]"));
-            e.map(function (e) {
+            e.map(function(e) {
                 var t = e.getAttribute("data-app-" + n + "-img");
                 e.src = assetsPath + "img/" + t
             })
         }
-        window.templateCustomizer && (s && s.addEventListener("click", function () {
+        window.templateCustomizer && (s && s.addEventListener("click", function() {
             window.Helpers.isLightStyle() ? window.templateCustomizer.setStyle("dark") : window.templateCustomizer.setStyle("light")
         }), window.Helpers.isLightStyle() ? (s && (s.querySelector("i").classList.add("bx-moon"), new bootstrap.Tooltip(s, {
             title: "Dark mode",
@@ -43,7 +43,7 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
         })), a("light")) : (s && (s.querySelector("i").classList.add("bx-sun"), new bootstrap.Tooltip(s, {
             title: "Light mode",
             fallbackPlacements: ["bottom"]
-        })), a("dark"))), window.onscroll = function () {
+        })), a("dark"))), window.onscroll = function() {
             document.getElementById("layout-navbar") && (10 < document.body.scrollTop || 10 < document.documentElement.scrollTop ? document.getElementById("layout-navbar").classList.add("navbar-elevated") : document.getElementById("layout-navbar").classList.remove("navbar-elevated"))
         }, "undefined" != typeof i18next && "undefined" != typeof i18nextXHRBackend && i18next.use(i18nextXHRBackend).init({
             lng: "en",
@@ -53,16 +53,16 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                 loadPath: assetsPath + "json/locales/{{lng}}.json"
             },
             returnObjects: !0
-        }).then(function (e) {
+        }).then(function(e) {
             i()
         });
         let l = document.getElementsByClassName("dropdown-language");
         if (l.length) {
             let t = l[0].querySelectorAll(".dropdown-item");
-            for (let e = 0; e < t.length; e++) t[e].addEventListener("click", function () {
+            for (let e = 0; e < t.length; e++) t[e].addEventListener("click", function() {
                 let e = this.getAttribute("data-language"),
                     t = this.querySelector(".fi").getAttribute("class"),
-                    n = t.split(" ").filter(function (e) {
+                    n = t.split(" ").filter(function(e) {
                         return 0 !== e.lastIndexOf("fs-", 0)
                     });
                 t = n.join(" ").trim() + " fs-3";
@@ -77,7 +77,7 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
         function i() {
             let e = document.querySelectorAll("[data-i18n]"),
                 t = document.querySelector('.dropdown-item[data-language="' + i18next.language + '"]');
-            t && t.click(), e.forEach(function (e) {
+            t && t.click(), e.forEach(function(e) {
                 e.innerHTML = i18next.t(e.dataset.i18n)
             })
         }
@@ -101,41 +101,41 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                     t.closest(".dropdown-notifications-item").remove()
                 })
             }), [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))),
-            p = (m.map(function (e) {
+            p = (m.map(function(e) {
                 return new bootstrap.Tooltip(e)
             }), [].slice.call(document.querySelectorAll(".accordion")));
-        p.map(function (e) {
+        p.map(function(e) {
             e.addEventListener("show.bs.collapse", r), e.addEventListener("hide.bs.collapse", r)
         });
-        if (isRtl && Helpers._addClass("dropdown-menu-end", document.querySelectorAll("#layout-navbar .dropdown-menu")), window.Helpers.setAutoUpdate(!0), window.Helpers.initPasswordToggle(), window.Helpers.initSpeechToText(), window.Helpers.initNavbarDropdownScrollbar(), window.addEventListener("resize", function (e) {
-                window.innerWidth >= window.Helpers.LAYOUT_BREAKPOINT && document.querySelector(".search-input-wrapper") && (document.querySelector(".search-input-wrapper").classList.add("d-none"), document.querySelector(".search-input").value = ""), document.querySelector("[data-template^='horizontal-menu']") && setTimeout(function () {
+        if (isRtl && Helpers._addClass("dropdown-menu-end", document.querySelectorAll("#layout-navbar .dropdown-menu")), window.Helpers.setAutoUpdate(!0), window.Helpers.initPasswordToggle(), window.Helpers.initSpeechToText(), window.Helpers.initNavbarDropdownScrollbar(), window.addEventListener("resize", function(e) {
+                window.innerWidth >= window.Helpers.LAYOUT_BREAKPOINT && document.querySelector(".search-input-wrapper") && (document.querySelector(".search-input-wrapper").classList.add("d-none"), document.querySelector(".search-input").value = ""), document.querySelector("[data-template^='horizontal-menu']") && setTimeout(function() {
                     window.innerWidth < window.Helpers.LAYOUT_BREAKPOINT ? document.getElementById("layout-menu") && document.getElementById("layout-menu").classList.contains("menu-horizontal") && menu.switchMenu("vertical") : document.getElementById("layout-menu") && document.getElementById("layout-menu").classList.contains("menu-vertical") && menu.switchMenu("horizontal")
                 }, 100)
             }, !0), !isHorizontalLayout && !window.Helpers.isSmallScreen() && ("undefined" != typeof TemplateCustomizer && window.templateCustomizer.settings.defaultMenuCollapsed && window.Helpers.setCollapsed(!0, !1), "undefined" != typeof config && config.enableMenuLocalStorage)) try {
             null !== localStorage.getItem("templateCustomizer-" + templateName + "--LayoutCollapsed") && "false" !== localStorage.getItem("templateCustomizer-" + templateName + "--LayoutCollapsed") && window.Helpers.setCollapsed("true" === localStorage.getItem("templateCustomizer-" + templateName + "--LayoutCollapsed"), !1)
         } catch (e) {}
-    }(), "undefined" != typeof $ && $(function () {
+    }(), "undefined" != typeof $ && $(function() {
         window.Helpers.initSidebarToggle();
         var t, n, e, o = $(".search-toggler"),
             s = $(".search-input-wrapper"),
             a = $(".search-input"),
             l = $(".content-backdrop");
-        o.length && o.on("click", function () {
+        o.length && o.on("click", function() {
             s.length && (s.toggleClass("d-none"), a.focus())
-        }), $(document).on("keydown", function (e) {
+        }), $(document).on("keydown", function(e) {
             var t = e.ctrlKey,
                 e = 191 === e.which;
             t && e && s.length && (s.toggleClass("d-none"), a.focus())
-        }), a.on("focus", function () {
+        }), a.on("focus", function() {
             s.hasClass("container-xxl") && s.find(".twitter-typeahead").addClass("container-xxl")
-        }), a.length && (t = function (o) {
-            return function (t, e) {
+        }), a.length && (t = function(o) {
+            return function(t, e) {
                 let n;
-                n = [], o.filter(function (e) {
+                n = [], o.filter(function(e) {
                     if (e.name.toLowerCase().startsWith(t.toLowerCase())) n.push(e);
                     else {
                         if (e.name.toLowerCase().startsWith(t.toLowerCase()) || !e.name.toLowerCase().includes(t.toLowerCase())) return [];
-                        n.push(e), n.sort(function (e, t) {
+                        n.push(e), n.sort(function(e, t) {
                             return t.name < e.name ? 1 : -1
                         })
                     }
@@ -145,7 +145,7 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
             url: assetsPath + "json/" + o,
             dataType: "json",
             async: !1
-        }).responseJSON, a.each(function () {
+        }).responseJSON, a.each(function() {
             var e = $(this);
             a.typeahead({
                 hint: !1,
@@ -161,7 +161,7 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                 source: t(n.pages),
                 templates: {
                     header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Pages</h6>',
-                    suggestion: function ({
+                    suggestion: function({
                         url: e,
                         icon: t,
                         name: n
@@ -177,7 +177,7 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                 source: t(n.files),
                 templates: {
                     header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Files</h6>',
-                    suggestion: function ({
+                    suggestion: function({
                         src: e,
                         name: t,
                         subtitle: n,
@@ -194,7 +194,7 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                 source: t(n.members),
                 templates: {
                     header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Members</h6>',
-                    suggestion: function ({
+                    suggestion: function({
                         name: e,
                         src: t,
                         subtitle: n
@@ -203,21 +203,21 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
                     },
                     notFound: '<div class="not-found px-3 py-2"><h6 class="suggestions-header text-primary mb-2">Members</h6><p class="py-2 mb-0"><i class="bx bx-error-circle bx-xs me-2"></i> No Results Found</p></div>'
                 }
-            }).bind("typeahead:render", function () {
+            }).bind("typeahead:render", function() {
                 l.addClass("show").removeClass("fade")
-            }).bind("typeahead:select", function (e, t) {
+            }).bind("typeahead:select", function(e, t) {
                 t.url && (window.location = t.url)
-            }).bind("typeahead:close", function () {
+            }).bind("typeahead:close", function() {
                 a.val(""), e.typeahead("val", ""), s.addClass("d-none"), l.addClass("fade").removeClass("show")
-            }), a.on("keyup", function () {
+            }), a.on("keyup", function() {
                 "" == a.val() && l.addClass("fade").removeClass("show")
             })
-        }), $(".navbar-search-suggestion").each(function () {
+        }), $(".navbar-search-suggestion").each(function() {
             e = new PerfectScrollbar($(this)[0], {
                 wheelPropagation: !1,
                 suppressScrollX: !0
             })
-        }), a.on("keyup", function () {
+        }), a.on("keyup", function() {
             e.update()
         }))
     });

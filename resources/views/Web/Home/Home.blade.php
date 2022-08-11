@@ -235,25 +235,26 @@
                 convallis eros sollicitudin turpis.</p> -->
         </div>
         <div class="grid-item-holder gallery-items fl-wrap">
-            <!--  gallery-item-->
+            @foreach ($merchandise as $merchandise)
+                 <!--  gallery-item-->
             <div class="gallery-item restaurant events">
                 <!-- listing-item  -->
                 <div class="listing-item">
                     <article class="geodir-category-listing fl-wrap">
                         <div class="geodir-category-img">
                             <a href="javascript:void(0)" class="geodir-category-img-wrap fl-wrap">
-                                <img src="{{url('public/images/blog&merchendise/merchendise.jpeg')}}" alt="">
+                                <div style="width: 100%; height: 300px; background-image: url('{{url('public/portal_images/merchandise_images/'. $merchandise->merchandise_img)}}'); background-position: center;
+                                    "></div>
                             </a>
                         </div>
                         <div class="geodir-category-content fl-wrap title-sin_item">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="javascript:void(0)">Bombay Stationary</a></h3>
+                                    <h3 class="title-sin_map"><a href="javascript:void(0)">{{$merchandise->merchandise_name}}</a></h3>
                                 </div>
                             </div>
                             <div class="geodir-category-text fl-wrap">
-                                <p class="small-text">We have been dealing with all stationery products like Ball Pens,
-                                    Microtip Pens, Pen Sets, Fine Writing-Fountain Pens, Pencils...</p>
+                                <p class="small-text">{{Str::limit($merchandise->merchandise_desc,40,'..')  ?? ''}}</p>
                             </div>
                         </div>
                     </article>
@@ -261,84 +262,8 @@
                 <!-- listing-item end -->
             </div>
             <!-- gallery-item  end-->
-            <!--  gallery-item-->
-            <div class="gallery-item restaurant events">
-                <!-- listing-item  -->
-                <div class="listing-item">
-                    <article class="geodir-category-listing fl-wrap">
-                        <div class="geodir-category-img">
-                            <a href="javascript:void(0)" class="geodir-category-img-wrap fl-wrap">
-                                <img src="{{url('public/images/blog&merchendise/merchendise.jpeg')}}" alt="">
-                            </a>
-                        </div>
-                        <div class="geodir-category-content fl-wrap title-sin_item">
-                            <div class="geodir-category-content-title fl-wrap">
-                                <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="javascript:void(0)">Bombay Stationary</a></h3>
-                                </div>
-                            </div>
-                            <div class="geodir-category-text fl-wrap">
-                                <p class="small-text">We have been dealing with all stationery products like Ball Pens,
-                                    Microtip Pens, Pen Sets, Fine Writing-Fountain Pens, Pencils...</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <!-- listing-item end -->
-            </div>
-            <!-- gallery-item  end-->
-            <!-- gallery-item  -->
-            <div class="gallery-item restaurant events">
-                <!-- listing-item  -->
-                <div class="listing-item">
-                    <article class="geodir-category-listing fl-wrap">
-                        <div class="geodir-category-img">
-                            <a href="javascript:void(0)" class="geodir-category-img-wrap fl-wrap">
-                                <img src="{{url('public/images/blog&merchendise/merchendise.jpeg')}}" alt="">
-                            </a>
-                        </div>
-                        <div class="geodir-category-content fl-wrap title-sin_item">
-                            <div class="geodir-category-content-title fl-wrap">
-                                <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="javascript:void(0)">Bombay Stationary</a></h3>
-                                </div>
-                            </div>
-                            <div class="geodir-category-text fl-wrap">
-                                <p class="small-text">We have been dealing with all stationery products like Ball Pens,
-                                    Microtip Pens, Pen Sets, Fine Writing-Fountain Pens, Pencils...</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <!-- listing-item end -->
-            </div>
-            <!-- gallery-item  end-->
-            <!-- gallery-item  -->
-            <div class="gallery-item restaurant events">
-                <!-- listing-item  -->
-                <div class="listing-item">
-                    <article class="geodir-category-listing fl-wrap">
-                        <div class="geodir-category-img">
-                            <a href="javascript:void(0)" class="geodir-category-img-wrap fl-wrap">
-                                <img src="{{url('public/images/blog&merchendise/merchendise.jpeg')}}" alt="">
-                            </a>
-                        </div>
-                        <div class="geodir-category-content fl-wrap title-sin_item">
-                            <div class="geodir-category-content-title fl-wrap">
-                                <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="javascript:void(0)">Bombay Stationary</a></h3>
-                                </div>
-                            </div>
-                            <div class="geodir-category-text fl-wrap">
-                                <p class="small-text">We have been dealing with all stationery products like Ball Pens,
-                                    Microtip Pens, Pen Sets, Fine Writing-Fountain Pens, Pencils...</p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <!-- listing-item end -->
-            </div>
-            <!-- gallery-item  end-->
+            @endforeach
+
         </div>
     </div>
 </section>
